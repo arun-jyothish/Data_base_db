@@ -6,7 +6,7 @@ enum status {
 	ER_INS,
 	ER_MEM
 };
-#define TAB_SZ 100
+#define TAB_SZ 10
 struct data {
 	int hash ;
 	char name [20];

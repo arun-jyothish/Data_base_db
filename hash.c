@@ -6,7 +6,8 @@
 void main(){
 	int count = 0;
 	printf("\n\nDATABASE PROGRAM\n\n"); 
-	data_t *d1 = (data_t *)malloc ( sizeof (struct data)) ;
+	/* data_t *d1 = (data_t *)malloc ( sizeof (struct data)) ; */
+	data_t d1[10];
 	while (1){
 		system("clear");
 		printf("\nEnter Command\nx-exit,\ti-insert,\tp-print,\td-delete\t: "); 
@@ -18,7 +19,7 @@ void main(){
 			case 'i':
 				count ++;
 				printf("\nInsert Data .. ! \n"); 
-				insert_data( d1 ,count);
+				insert_data( d1 ,10);
 				break;
 			case 'd':
 				printf("\nDelete Data.. ! \n"); 
@@ -26,7 +27,7 @@ void main(){
 				return;
 			case 'p':
 				printf("\nPrint Data.. ! \n"); 
-				print_data(d1, count);
+				print_data(d1, 10);
 				return;
 		}
 	}
@@ -41,9 +42,11 @@ void del_user(data_t *dp){
 
 void print_data ( data_t *data , int count){
 	for (int i = 0; i < count; ++i){
+		printf("\nCustomer hash	: %d", 		data[i].hash);
 		printf("\nCustomer Name : %s", 		data[i].name);
 		printf("\nCustomer Age : %hd", 		data[i].age);
-		printf("\nCustomer Description : %s", 	data[i].msg);
+		printf("\nCustomer Description : %s\n", 	data[i].msg);
+		
 	}
 }
 
@@ -57,13 +60,13 @@ hash_t hash(char * ch ){
 			printf("hash failed ... more than 20 characters\n");
 			return -1; }
 	}
-	hash_t hash;
-	hash = sum * 31 % TAB_SZ;	// randomize and limit to hash table size
-	return hash;
+	hash_t hash_d;
+	hash_d = sum % TAB_SZ;	// randomize and limit to hash table size
+	return hash_d;
 }
 
 short insert_data(data_t * data,int count ){
-	data = realloc ( data, sizeof(data_t)* count );
+	/* data = realloc ( data, sizeof(data_t)* count ); */
 	if ( data == NULL ){
 		printf("\nMem alloc failed.. ! ");
 		return ER_MEM; }
@@ -74,6 +77,8 @@ short insert_data(data_t * data,int count ){
 	if ( data[hash_d].hash == hash_d ){
 		printf("\n Insert Failed, data exists ..:");
 		return ER_INS; }
+	else{
+		printf("\n hash : %d",data->hash);}
 	printf("\nEnter age:");
 	scanf (" %hd", &data->age);
 	printf("\nEnter Message:");
