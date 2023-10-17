@@ -15,10 +15,12 @@ struct data {
 };
 typedef int hash_t ;
 typedef struct data data_t;
-void print_data ( data_t *data , int count);
-short insert_data(data_t * data ,int count);
-hash_t hash(char * ch );
-data_t get_data( char *ch, data_t * dp );
-void del_user();
 
+
+void del_user(data_t *dp);
+void print_all_data ();
+void print_data ( data_t *data );
+hash_t hash(char * ch );
+short insert_data();
+data_t* get_id();
 #endif 
