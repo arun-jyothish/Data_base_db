@@ -1,0 +1,11 @@
+
+
+
+#define terminated "\
+|								|\
+|								|\
+|		DELETE	SUCCESS			|\
+|								|\
+|								|\
+|								|\
+"

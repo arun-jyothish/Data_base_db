@@ -1,47 +1,43 @@
 #include <stdlib.h>
+#include "display.h"
+#include <unistd.h>
 #include <stdio.h>
 #include "hash.h"
 
 data_t *table[TAB_SZ];
 int data_count = 0;
-/*
-int main(){
-	char name [20];
-	while(1){
-		printf("%d",get_id());
-	}
-	return 0;	
-}
-*/
 void main(){
 	int count = 0;
 	printf("\n\nDATABASE PROGRAM\n\n"); 
+	int val = 0;
 	while (1){
+		sleep(2);
 		system("clear");
-		printf("\nEnter Command\nx-exit,\ti-insert,\tp-print,\td-delete\t: "); 
-		int cmd  = getc(stdin);
+		char cmd;
+		printf("\nENTER COMMAND\n\tx-EXIT,\ti-INSERT,\tp-PRINT,\td-DELETE\n\t==> "); 
+		while( ( cmd = getc(stdin) ) == 10);
 		switch (cmd){
 			case 'x':
-				printf("\nProgram Terminated .. ! \n"); 
+				printf(terminated); 
 				return;
 			case 'i':
 				printf("\nInsert Data .. ! \n"); 
 				insert_data();
+				/* menu(ins_succ); */
 				break;
 			case 'd':
 				printf("\nDelete Data.. ! \n"); 
 				del_user( get_id() );
+				/* menu(del_succ); */
+				break;
 				break;
 			case 'p':
-				printf("\nPrint Data.. ! \n"); 
+				printf("\nPrint Data.. ! \n "); 
 				print_all_data();
 				break;
 		}
-		fflush(stdin);
-		getc(stdin);
 	}
 }
-
 void del_user(data_t *dp){
 	if ( dp == NULL || dp->hash == -1){
 		return;}
@@ -53,20 +49,20 @@ void del_user(data_t *dp){
 void print_all_data (){
 	for (int i = 0; i < TAB_SZ; ++i){
 		print_data( table[i] );
-		printf("\n"); }
+	}
 }
 
 void print_data ( data_t *data ){
 	if ( data == NULL || data == 0 || data->hash == -1){
-		return; }
-		printf("\nCustomer hash	: %d", 		data->hash);
-		printf("\nCustomer Name : %s", 		data->name);
-		printf("\nCustomer Age : %hd", 		data->age);
-		printf("\nCustomer Description : %s", 	data->msg);
+			return; }
+			printf("\nCustomer hash	: %d", 		data->hash);
+			printf("\nCustomer Name : %s", 		data->name);
+			printf("\nCustomer Age : %hd", 		data->age);
+			printf("\nCustomer Description : %s\n", 	data->msg);
 }
 
 hash_t hash(char * ch ){
-	int sum = 0, i = 0;		
+	unsigned int sum = 0, i = 0;		
 	while ( ch[i] != '\0'){
 		sum *= ch[i];
 		sum += ch[i];
