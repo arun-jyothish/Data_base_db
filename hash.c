@@ -106,3 +106,5 @@ data_t* get_id(){
 	int id = hash (name);
 	return table[id];
 }
+
+// comment add
